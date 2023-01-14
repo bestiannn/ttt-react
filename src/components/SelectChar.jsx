@@ -1,8 +1,10 @@
 import { useCurrentViewStore } from "../store/currentViewStore";
 import { useGameStore } from "../store/gameStore";
+import { usePlayerStore } from "../store/playerStore";
 
 const SelectChar = () => {
   const { playersInfo, setPlayer1, setPlayer2 } = useGameStore();
+  const { setChar } = usePlayerStore();
   const { setCurrentView } = useCurrentViewStore();
 
   const handleClickX = () => {
@@ -10,6 +12,7 @@ const SelectChar = () => {
       ...playersInfo.player1,
       char: "X",
     });
+    setChar("X");
     setPlayer2({
       ...playersInfo.player2,
       char: "O",
@@ -22,6 +25,7 @@ const SelectChar = () => {
       ...playersInfo.player1,
       char: "O",
     });
+    setChar("O");
     setPlayer2({
       ...playersInfo.player2,
       char: "X",

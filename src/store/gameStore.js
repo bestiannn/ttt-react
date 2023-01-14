@@ -5,6 +5,7 @@ export const useGameStore = create(
   (set) => ({
     id: null,
     vs: null,
+    turn: "X",
     playersInfo: {
       player1: {
         id: null,
@@ -26,6 +27,8 @@ export const useGameStore = create(
     // Setters for the store
     setId: (id) => set({ id }),
     setVs: (vs) => set({ vs }),
+    setTurn: (turn) => set({ turn }),
+    toogleTurn: () => set((state) => ({ turn: state.turn === "X" ? "O" : "X" })),
     setPlayersInfo: (playersInfo) => set({ playersInfo }),
     setStats: (stats) => set({ stats }),
 
