@@ -12,11 +12,11 @@ const Score = () => {
       </div>
       <div className="flex flex-col">
         <span>TIES</span>
-        <strong>{losses}</strong>
+        <strong>{ties}</strong>
       </div>
       <div className="flex flex-col">
         <span>O (CPU)</span>
-        <strong>{ties}</strong>
+        <strong>{losses}</strong>
       </div>
     </div>
   );

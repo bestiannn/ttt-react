@@ -4,7 +4,7 @@ import { usePlayerStore } from "../store/playerStore";
 
 const Table = () => {
   const { char } = usePlayerStore();
-  const { turn, toogleTurn } = useGameStore();
+  const { turn, toogleTurn, addWin, addLoss, addTie } = useGameStore();
 
   const [playsInfo, setPlaysInfo] = useState([
     [
@@ -162,17 +162,64 @@ const Table = () => {
   };
 
   useEffect(() => {
-    if (checkWinner()) return;
+    if (checkWinner()) {
+      if (checkWinner() === char) {
+        addWin();
+      } else {
+        addLoss();
+      }
 
-    console.log(lineWinner);
+      setPlaysInfo([
+        [
+          { id: 1, char: null },
+          { id: 2, char: null },
+          { id: 3, char: null },
+        ],
+        [
+          { id: 4, char: null },
+          { id: 5, char: null },
+          { id: 6, char: null },
+        ],
+        [
+          { id: 7, char: null },
+          { id: 8, char: null },
+          { id: 9, char: null },
+        ],
+      ]);
+      setLineWinner([]);
+      return;
+    }
+    if (playsInfo.flat().every((play) => play.char !== null)) {
+      addTie();
+      setPlaysInfo([
+        [
+          { id: 1, char: null },
+          { id: 2, char: null },
+          { id: 3, char: null },
+        ],
+        [
+          { id: 4, char: null },
+          { id: 5, char: null },
+          { id: 6, char: null },
+        ],
+        [
+          { id: 7, char: null },
+          { id: 8, char: null },
+          { id: 9, char: null },
+        ],
+      ]);
+      setLineWinner([]);
+      return;
+    }
 
     // check if there is a char in null
     const hasNull = playsInfo.flat().some((play) => !play.char);
+    let enemyPlay;
     if (!hasNull) return;
     else if (char !== turn) {
       const emptyPlay = playsInfo.flat().find((play) => !play.char).id;
 
-      setTimeout(() => {
+      enemyPlay = setTimeout(() => {
         setPlaysInfo((prevPlaysInfo) => {
           const newPlaysInfo = prevPlaysInfo.map((row) =>
             row.map((play) => {
@@ -190,6 +237,8 @@ const Table = () => {
         toogleTurn();
       }, 2000);
     }
+
+    return () => clearTimeout(enemyPlay);
   }, [playsInfo]);
 
   return (
