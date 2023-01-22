@@ -1,13 +1,17 @@
 import { useGameStore } from "../store/gameStore";
+import { usePlayerStore } from "../store/playerStore";
 
 const Score = () => {
+  const { char, getEnemyChar } = usePlayerStore();
   const { stats } = useGameStore();
   const { wins, losses, ties } = stats;
+
+  const enemyChar = getEnemyChar();
 
   return (
     <div className="flex justify-between">
       <div className="flex flex-col">
-        <span>x (YOU)</span>
+        <span>{char} (YOU)</span>
         <strong>{wins}</strong>
       </div>
       <div className="flex flex-col">
@@ -15,7 +19,7 @@ const Score = () => {
         <strong>{ties}</strong>
       </div>
       <div className="flex flex-col">
-        <span>O (CPU)</span>
+        <span>{enemyChar} (CPU)</span>
         <strong>{losses}</strong>
       </div>
     </div>

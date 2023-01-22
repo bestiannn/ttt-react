@@ -66,7 +66,7 @@ const Table = () => {
       playsInfo[0].char === playsInfo[4].char &&
       playsInfo[0].char === playsInfo[8].char
     ) {
-      setLineWinner([0, 4, 8]);
+      setLineWinner([1, 5, 9]);
       return playsInfo[0].char;
     }
     if (
@@ -74,7 +74,7 @@ const Table = () => {
       playsInfo[2].char === playsInfo[4].char &&
       playsInfo[2].char === playsInfo[6].char
     ) {
-      setLineWinner([2, 4, 6]);
+      setLineWinner([3, 5, 7]);
       return playsInfo[2].char;
     }
 

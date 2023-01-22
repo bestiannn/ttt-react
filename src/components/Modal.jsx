@@ -1,12 +1,21 @@
 import { useCurrentViewStore } from "../store/currentViewStore";
+import { useGameStore } from "../store/gameStore";
 
 const Modal = ({ setModalOpen, resetPlaysInfo, setLineWinner }) => {
   const { setCurrentView } = useCurrentViewStore();
+  const { resetStats, resetTurn } = useGameStore();
 
-  const reset = () => {
+  const handleReset = () => {
     setModalOpen(false);
     setLineWinner([]);
     resetPlaysInfo();
+  };
+
+  const handleExit = () => {
+    handleReset();
+    resetStats();
+    resetTurn();
+    setCurrentView("home");
   };
 
   return (
@@ -15,13 +24,13 @@ const Modal = ({ setModalOpen, resetPlaysInfo, setLineWinner }) => {
       <div className="flex gap-5">
         <button
           className="rounded-xl border px-5 py-2 font-bold"
-          onClick={() => reset()}
+          onClick={() => handleReset()}
         >
           Play again
         </button>
         <button
           className="rounded-xl border px-5 py-2 font-bold"
-          onClick={() => setCurrentView("home")}
+          onClick={() => handleExit()}
         >
           Exit
         </button>

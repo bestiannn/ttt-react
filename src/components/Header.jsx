@@ -6,10 +6,12 @@ import { useGameStore } from "../store/gameStore";
 
 const Header = () => {
   const { setCurrentView } = useCurrentViewStore();
-  const { turn } = useGameStore();
+  const { turn, resetStats, resetTurn } = useGameStore();
 
   const handleBack = () => {
-    setCurrentView("lobby");
+    resetStats();
+    resetTurn();
+    setCurrentView("home");
   };
 
   return (

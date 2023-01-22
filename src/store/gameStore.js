@@ -28,7 +28,8 @@ export const useGameStore = create(
     setId: (id) => set({ id }),
     setVs: (vs) => set({ vs }),
     setTurn: (turn) => set({ turn }),
-    toogleTurn: () => set((state) => ({ turn: state.turn === "X" ? "O" : "X" })),
+    toogleTurn: () =>
+      set((state) => ({ turn: state.turn === "X" ? "O" : "X" })),
     setPlayersInfo: (playersInfo) => set({ playersInfo }),
     setStats: (stats) => set({ stats }),
 
@@ -51,6 +52,13 @@ export const useGameStore = create(
       set((state) => ({
         stats: { ...state.stats, ties: state.stats.ties + 1 },
       })),
+
+    // Reset stats
+    resetStats: () =>
+      set(() => ({
+        stats: { wins: 0, losses: 0, ties: 0 },
+      })),
+    resetTurn: () => set(() => ({ turn: "X" })),
   }),
   shallow
 );
