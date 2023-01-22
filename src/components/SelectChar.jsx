@@ -35,7 +35,7 @@ const SelectChar = () => {
 
   return (
     <div className="grid h-full place-content-center gap-10">
-      <h2 className="text-xl font-bold">Select your team</h2>
+      <h2 className="text-xl font-bold">Select your character</h2>
       <div className="flex justify-between gap-10">
         <button
           className="rounded-xl border px-5 py-2 font-bold"

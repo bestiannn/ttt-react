@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useGameStore } from "../store/gameStore";
 import { usePlayerStore } from "../store/playerStore";
+import Modal from "./Modal";
 
 const Table = () => {
   const { char } = usePlayerStore();
   const { turn, toogleTurn, addWin, addLoss, addTie } = useGameStore();
+  const [modalOpen, setModalOpen] = useState(false);
 
   const [playsInfo, setPlaysInfo] = useState([
     { id: 1, char: null },
@@ -43,7 +45,7 @@ const Table = () => {
         playsInfo[i].char === playsInfo[i + 1].char &&
         playsInfo[i].char === playsInfo[i + 2].char
       ) {
-        setLineWinner([i, i + 1, i + 2]);
+        setLineWinner([i + 1, i + 2, i + 3]);
         return playsInfo[i].char;
       }
     }
@@ -54,7 +56,7 @@ const Table = () => {
         playsInfo[i].char === playsInfo[i + 3].char &&
         playsInfo[i].char === playsInfo[i + 6].char
       ) {
-        setLineWinner([i, i + 3, i + 6]);
+        setLineWinner([i + 1, i + 4, i + 7]);
         return playsInfo[i].char;
       }
     }
@@ -99,16 +101,19 @@ const Table = () => {
       if (checkWinner() === char) addWin();
       else addLoss();
 
-      resetPlaysInfo();
-      setLineWinner([]);
+      // resetPlaysInfo();
+      // setLineWinner([]);
+      setModalOpen(true);
       return;
     }
 
     // Tie
     if (playsInfo.every((play) => play.char !== null)) {
       addTie();
-      resetPlaysInfo();
-      setLineWinner([]);
+
+      // resetPlaysInfo();
+      // setLineWinner([]);
+      setModalOpen(true);
       return;
     }
 
@@ -143,6 +148,14 @@ const Table = () => {
 
   return (
     <div className="grid flex-1 grid-cols-3 gap-5 text-center">
+      {modalOpen && (
+        <Modal
+          setModalOpen={setModalOpen}
+          resetPlaysInfo={resetPlaysInfo}
+          setLineWinner={setLineWinner}
+        />
+      )}
+
       {playsInfo.map(({ id, char }) => (
         <div
           className={`grid place-content-center rounded-xl bg-surface2 ${
