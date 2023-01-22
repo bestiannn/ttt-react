@@ -155,6 +155,7 @@ const Table = () => {
           setModalOpen={setModalOpen}
           resetPlaysInfo={resetPlaysInfo}
           setLineWinner={setLineWinner}
+          checkWinner={checkWinner}
         />
       )}
 
