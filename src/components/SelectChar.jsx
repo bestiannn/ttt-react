@@ -38,13 +38,13 @@ const SelectChar = () => {
       <h2 className="text-xl font-bold">Select your character</h2>
       <div className="flex justify-between gap-10">
         <button
-          className="rounded-xl border px-5 py-2 font-bold"
+          className="rounded-xl border text-2xl px-5 py-2 font-bold"
           onClick={handleClickX}
         >
           X
         </button>
         <button
-          className="rounded-xl border px-5 py-2 font-bold"
+          className="rounded-xl border text-2xl px-5 py-2 font-bold"
           onClick={handleClickO}
         >
           O

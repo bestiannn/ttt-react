@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BsCircle } from "react-icons/bs";
 import { useGameStore } from "../store/gameStore";
 import { usePlayerStore } from "../store/playerStore";
 import Modal from "./Modal";
@@ -164,7 +166,13 @@ const Table = () => {
           key={id}
           onClick={() => handleClick(id)}
         >
-          {char}
+          {char === null ? (
+            <p className="select-none text-surface2">null</p>
+          ) : char === "X" ? (
+            <AiOutlineClose className="text-2xl" />
+          ) : (
+            <BsCircle className="text-xl" />
+          )}
         </div>
       ))}
     </div>
